@@ -379,7 +379,7 @@ input#fold:not(:checked) ~ #main .catch-of-the-day > * {
 }
 label[for="fold"] {
   position: absolute;
-  top: 1rem;
+  top: 0rem;
   left: 1rem;
   text-transform: uppercase;
   font-size: 1.3rem;
