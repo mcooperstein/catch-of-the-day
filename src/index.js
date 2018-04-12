@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import StorePicker from './components/StorePicker';
-import App from './components/App';
+// import StorePicker from './components/StorePicker';
+// import App from './components/App';
+import Router from './components/Router';
 import './css/style.css';
 
 /*class App extends Component {
@@ -12,4 +13,4 @@ import './css/style.css';
   }
 }*/
 
-ReactDOM.render(<App />, document.getElementById('main'))
+ReactDOM.render(<Router />, document.getElementById('main'))
