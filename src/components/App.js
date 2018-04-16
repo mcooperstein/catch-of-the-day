@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 import Header from './Header';
 import Order from './Order';
 import Inventory from './Inventory';
@@ -14,6 +15,9 @@ class App extends Component {
       fishes: {},
       order: {},
     }
+  }
+  static propTpyes = {
+    match: PropTypes.object
   }
   componentDidMount(){
     // first reinstate our localStorage data
@@ -53,6 +57,14 @@ class App extends Component {
     // 3. Set that to state
     this.setState({fishes});
   }
+  deleteFish = (key) => {
+    // 1. Take a copy of the current state
+    const fishes = {...this.state.fishes};
+    // 2. Update that state -> need to set to null to also delete from firebase
+    fishes[key] = null;
+    // 3.
+    this.setState({fishes});
+  }
   loadSampleFishes = () => {
     this.setState({fishes:sampleFishes})
   }
@@ -61,6 +73,14 @@ class App extends Component {
     const order = {...this.state.order}
     // 2. add to order or update quantity
     order[key] = order[key]+1 || 1;
+    //3. call setState to update state object
+    this.setState({order});
+  }
+  removeFromOrder = (key) => {
+    // 1. take a copy of state
+    const order = {...this.state.order}
+    // 2. remove from order or update quantity
+    delete order[key]
     //3. call setState to update state object
     this.setState({order});
   }
@@ -75,8 +95,8 @@ class App extends Component {
               )}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order}/>
-        <Inventory updateFish={this.updateFish} addFish={this.addFish} loadFishes={this.loadSampleFishes} fishes={this.state.fishes}/>
+        <Order removeFromOrder={this.removeFromOrder} fishes={this.state.fishes} order={this.state.order}/>
+        <Inventory deleteFish={this.deleteFish} updateFish={this.updateFish} addFish={this.addFish} loadFishes={this.loadSampleFishes} fishes={this.state.fishes}/>
       </div>
     );
   }
